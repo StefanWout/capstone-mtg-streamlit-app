@@ -4,6 +4,7 @@ from etl.extract.extract_all import load_cards_data
 all_cards = load_cards_data()
 
 removeable_columns = [
+    'attractionLights', 
     'boosterTypes',
     'colorIndicator', 
     'duelDeck', 
@@ -25,6 +26,14 @@ removeable_columns = [
     'sourceProducts', 
     'subsets', 
     'watermark',
+    'isOnlineOnly',
+    'isFunny',
+    'hasFoil',
+    'hasNonFoil',
+    'isAlternative',
+    'isFullArt',
+    'isPromo',
+    'isRebalanced'
     ]
 
 
