@@ -38,4 +38,9 @@ removeable_columns = [
 
 
 def remove_useless_columns(all_cards, removeable_columns):
-    all_cards = all_cards.drop(columns=removeable_columns, errors='ignore')
+    for column in removeable_columns:
+        try:
+            all_cards = all_cards.drop(columns=[column], errors='raise')
+        except KeyError:
+            print(f"Warning: Column '{column}' not found in data.")
+    return all_cards

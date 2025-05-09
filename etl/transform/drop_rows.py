@@ -13,10 +13,6 @@ def remove_star_rows(all_cards):
         all_cards = all_cards[~all_cards['number'].str.contains('★', na=False)]
     return all_cards
 
-def remove_duplicate_cards(all_cards):
-    all_cards = all_cards.drop_duplicates(subset='name', keep='first')
-    return all_cards
-
 def remove_type_rows(all_cards):
     if 'type' in all_cards.columns:
         all_cards = all_cards[~all_cards['type'].str.contains('Vanguard', na=False)]
@@ -40,9 +36,16 @@ def remove_subsets_rows(all_cards):
     return all_cards
 
 def remove_digital_rows(all_cards):
-    if 'promavailabilityoTypes' in all_cards.columns:
-            all_cards = all_cards[~all_cards['promoavailabilityTypes'].str.contains('arena', na=False)]
-            all_cards = all_cards[~all_cards['promoavailabilityTypes'].str.contains('mtgo', na=False)]
-            all_cards = all_cards[~all_cards['promoavailabilityTypes'].str.contains('dreamcast', na=False)]
-            all_cards = all_cards[~all_cards['promoavailabilityTypes'].str.contains('shandalar', na=False)]
+    if 'availability' in all_cards.columns:
+            all_cards = all_cards[~all_cards['availability'].str.contains('arena', na=False)]
+            all_cards = all_cards[~all_cards['availability'].str.contains('mtgo', na=False)]
+            all_cards = all_cards[~all_cards['availability'].str.contains('dreamcast', na=False)]
+            all_cards = all_cards[~all_cards['availability'].str.contains('shandalar', na=False)]
+    return all_cards
+
+def remove_supertypes_rows(all_cards):
+    if 'supertypes' in all_cards.columns:
+        all_cards = all_cards[~all_cards['supertypes'].str.contains('Host', na=False)]
+        all_cards = all_cards[~all_cards['supertypes'].str.contains('Ongoing', na=False)]
+        all_cards = all_cards[~all_cards['supertypes'].str.contains('World', na=False)]
     return all_cards
