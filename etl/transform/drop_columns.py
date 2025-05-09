@@ -1,4 +1,3 @@
-import pandas as pd
 from etl.extract.extract_all import load_cards_data
 
 all_cards = load_cards_data()
