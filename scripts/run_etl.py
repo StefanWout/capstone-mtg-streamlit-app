@@ -1,9 +1,10 @@
 import os
 import sys
 from config.env_config import setup_env
-from etl.extract.extract import extract_data
-from etl.transform.transform import transform_data
-
+from etl.extract.extract import load_cards_data
+from etl.transform.transform import remove_useless_columns
+from etl.transform.transform import remove_duplicate_cards
+from etl.transform.transform import remove_un_set_rows
 
 def main():
     run_env_setup()

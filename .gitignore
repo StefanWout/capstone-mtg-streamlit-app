@@ -102,6 +102,7 @@ celerybeat.pid
 # .env      # Should not be committed left for demo
 # .env.*    # Should not be committed left for demo
 .venv
+.mtgvenv
 venv/
 ENV/
 env.bak/
@@ -132,8 +133,8 @@ dmypy.json
 cython_debug/
 
 # Environment variables files - note - Usually you should not commit these files
-# .env
-# .env.dev
+.env
+.env.dev
 # .env.test
 # .env.prod
 
