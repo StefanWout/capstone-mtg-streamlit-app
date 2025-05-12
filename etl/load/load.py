@@ -1,26 +1,27 @@
-from sqlalchemy import create_engine
 import os
-from dotenv import load_dotenv
-
-load_dotenv(dotenv_path="c:/Users/stefa/Documents/Digital Futures/capstone-mtg-streamlit-app/env.dev")
-
-# Retrieve database connection details from environment variables
-DB_NAME = os.getenv("TARGET_DB_NAME")
-DB_USER = os.getenv("TARGET_DB_USER")
-DB_PASSWORD = os.getenv("TARGET_DB_PASSWORD")
-DB_HOST = os.getenv("TARGET_DB_HOST")
-DB_PORT = os.getenv("TARGET_DB_PORT")
+import pandas as pd
+import sys
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
+from etl.transform.clean_data import clean_all_cards
 
 
-def populate_postgres(dataframe):
-    # Create a database connection
-    connection_string = f"postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
-    engine = create_engine(connection_string)
 
-    # Load the DataFrame into the PostgreSQL database
-    table_name = "cards"
+cleaned_cards = clean_all_cards()
+
+file_path = os.path.join(os.path.dirname(__file__), '..', '..', 'data', 'cleaned_cards.csv')
+
+def save_to_csv(dataframe, file_path):
+
     try:
-        dataframe.to_sql(table_name, engine, if_exists="replace", index=False)
-        print(f"Data successfully loaded into the '{table_name}' table in the '{DB_NAME}' database.")
+        dataframe.to_csv(file_path, index=False)
+        print(f"Data successfully saved to '{file_path}'.")
     except Exception as e:
-        print(f"Failed to load data: {e}")
+        print(f"Failed to save data to CSV: {e}")
+
+if __name__ == "__main__":
+    # Run the cleaning process
+    cleaned_cards = clean_all_cards()
+
+    # Save the cleaned data to a CSV
+    file_path = os.path.join(os.path.dirname(__file__), '..', '..', 'data', 'cleaned_cards.csv')
+    save_to_csv(cleaned_cards, file_path)
