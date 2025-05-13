@@ -94,7 +94,6 @@ def create_cov_command_str(test_dir, cov_sources):
         "&& coverage report -m"
     )
 
-
 def main():
     setup_env(["None", "test"])
     # Get the argument passed to run_tests
