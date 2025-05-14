@@ -23,19 +23,22 @@ def mono_color_distribution(data):
         'B': 'rgb(21, 11, 0)'
     }
 
-    # Sort the DataFrame by count in descending order
+    
     color_counts_df = color_counts_df.sort_values(by='count', ascending=False)
 
-    # Create a bar chart using Altair
-    chart = alt.Chart(color_counts_df).mark_bar().encode(
-        x=alt.X('colorIdentity', sort='-y', title='Color Identity'),
-        y=alt.Y('count', title='Count'),
-        color=alt.Color('colorIdentity', scale=alt.Scale(domain=list(color_mapping.keys()), range=list(color_mapping.values())), legend=None),
-        tooltip=['colorIdentity', 'count']
-    ).properties(
-        width=600,
-        height=400
-    )
+    if color_counts_df.empty:
+        st.subheader('Mono Color Distribution Across Selected Set')
+        st.write("There are no mono-colored cards in this set.")
+    else:
+        chart = alt.Chart(color_counts_df).mark_bar().encode(
+            x=alt.X('colorIdentity', sort='-y', title='Color Identity'),
+            y=alt.Y('count', title='Count'),
+            color=alt.Color('colorIdentity', scale=alt.Scale(domain=list(color_mapping.keys()), range=list(color_mapping.values())), legend=None),
+            tooltip=['colorIdentity', 'count']
+        ).properties(
+            width=600,
+            height=400
+        )
 
-    st.subheader('Mono Color Distribution Across All Sets')
-    st.altair_chart(chart, use_container_width=True)
+        st.subheader('Mono Color Distribution Across Selected Set')
+        st.altair_chart(chart, use_container_width=True)

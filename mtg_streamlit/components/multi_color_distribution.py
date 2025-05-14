@@ -16,25 +16,37 @@ def multi_color_distribution(data):
     color_counts_df.columns = ['colorIdentity', 'count']
     
     color_mapping = {
-        'G': 'rgb(0, 115, 62)',
-        'U': 'rgb(14, 104, 171)',
-        'R': 'rgb(211, 32, 42)',
-        'W': 'rgb(249, 250, 244)',
-        'B': 'rgb(21, 11, 0)'
+        'W': '⚪',  
+        'U': '🔵', 
+        'B': '⚫',  
+        'R': '🔴',  
+        'G': '🟢',
     }
-
+    # Replace the colorIdentity values with their corresponding symbols#
+    color_counts_df['colorIdentity'] = color_counts_df['colorIdentity'].apply(
+    lambda x: ''.join(color_mapping.get(char, char) for char in x)
+)
+   
     # Sort the DataFrame by count in descending order
     color_counts_df = color_counts_df.sort_values(by='count', ascending=False)
 
-    # Create a bar chart using Altair
-    chart = alt.Chart(color_counts_df).mark_bar().encode(
-        x=alt.X('colorIdentity', sort='-y', title='Color Identity'),
-        y=alt.Y('count', title='Count'),
-        tooltip=['colorIdentity', 'count']
-    ).properties(
-        width=600,
-        height=400
-    )
+    if color_counts_df.empty:
+        st.subheader('Multi Color Distribution Across Selected Set')
+        st.write("There are no multi-colored cards in this set.")
+    else:
+        chart = alt.Chart(color_counts_df).mark_bar().encode(
+            x=alt.X(
+            'colorIdentity',
+            sort='-y',
+            title='Color Identity',
+            axis=alt.Axis(labelAngle=90, labelLimit=500)  # Ensure all labels are fully displayed
+        ),
+            y=alt.Y('count', title='Count'),
+            tooltip=['colorIdentity', 'count']
+        ).properties(
+            width=600,
+            height=600
+        )
 
-    st.subheader('Multi Color Distribution Across All Sets')
-    st.altair_chart(chart, use_container_width=True)
+        st.subheader('Multi Color Distribution Across Selected Set')
+        st.altair_chart(chart, use_container_width=True)
