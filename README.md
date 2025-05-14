@@ -58,9 +58,10 @@ OR simply clone it on github with the URL
 The ETL (Extract, Transform, Load) pipeline is used to process the raw Magic: The Gathering dataset into a cleaned format (`cleaned_cards.csv`) that is used by the app.
 
 ### Steps to Run the ETL Pipeline
-1. Navigate to the ETL script directory:
+1. Navigate to the ETL then load directory:
    ```bash
    cd etl
+   cd load
 2. Should you have a more up to date csv file containing more recently released sets, name it cards.csv and replace the older version in the data folder at the root of the directory
 3. Remove the cleaned_cards.csv file from the data folder
 4. Run the etl script called load.py
