@@ -74,7 +74,7 @@ The ETL (Extract, Transform, Load) pipeline is used to process the raw Magic: Th
 - **Python**: Programming language for the app.
 - **Streamlit**: Framework for building interactive web apps.
 - **Pandas**: Data manipulation and analysis.
-- **Matplotlib/Seaborn**: Data visualization libraries.
+- **Altair**: Data visualization libraries.
 - **Git**: Version control.
 
 ## Dataset
