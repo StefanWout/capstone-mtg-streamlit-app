@@ -81,3 +81,23 @@ The ETL (Extract, Transform, Load) pipeline is used to process the raw Magic: Th
 -The app uses a cleaned dataset of Magic: The Gathering cards, stored in [cleaned_cards.csv]
 -Original Dataset found at https://mtgjson.com/downloads/all-files/
 - I used the AllPrintingsCSVFiles as this was going to be the most difficult to clean
+- As the dataset increases, the use of csv files will render the project out of date every few months, a switch to the scryfall API is recomended, especially as that would allow for east access to relevant images.
+- Testing could be more robust and offer more detailed messaging in failure states. 
+- Tests currently only cover the extraction and loading of data from csv to dataframe and from dataframe to csv and then back to dataframe for easier use in developing visualisations.
+  
+## Testing
+1. Navigate to the tests directory:
+   ```bash
+   cd tests
+2. run test suite:
+   ```bash
+   python run_tests.py
+
+## Deploying to cloud with AWS
+- Package the app and deploy with EC2
+- Automate ETL Pipeline with AWS Lambda
+- Store the Dataset using S3
+- Use Amazon RDS to store structured data
+- Use AWS API Gateway to fetch data from the scryfall API
+- Use CloudWatch to monitor and log app performance metrics
+- AWS Auto Scaling to handle increase traffic
