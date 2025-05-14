@@ -48,7 +48,7 @@ def replace_mana_symbols_in_text(text):
     return text
 
 def load_data(nrows):
-    data = pd.read_csv('../data/cleaned_cards.csv', nrows=nrows)
+    data = pd.read_csv('data/cleaned_cards.csv', nrows=nrows)
     return data
 
 def main():
