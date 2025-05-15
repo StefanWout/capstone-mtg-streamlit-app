@@ -19,9 +19,7 @@ def save_to_csv(dataframe, file_path):
         print(f"Failed to save data to CSV: {e}")
 
 if __name__ == "__main__":
-    # Run the cleaning process
     cleaned_cards = clean_all_cards()
 
-    # Save the cleaned data to a CSV
     file_path = os.path.join(os.path.dirname(__file__), '..', '..', 'data', 'cleaned_cards.csv')
     save_to_csv(cleaned_cards, file_path)
